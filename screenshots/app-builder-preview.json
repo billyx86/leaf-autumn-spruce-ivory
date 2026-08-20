@@ -1,0 +1,35 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "BAD ANGLE",
+      "hasCanvas": true,
+      "bodyTextLen": 324,
+      "bodyTextHash": "4a856f7e6fc48be87858bd252b85862ae5bf2e0b8abfaf607d73c22c01a36d7c",
+      "bodyTextPrefix": "OUTSIDE THE BLIND SPOT Sign in FIGHT FILMER SIMULATOR BAD ANGLE ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "BAD ANGLE",
+      "hasCanvas": true,
+      "bodyTextLen": 324,
+      "bodyTextHash": "4a856f7e6fc48be87858bd252b85862ae5bf2e0b8abfaf607d73c22c01a36d7c",
+      "bodyTextPrefix": "OUTSIDE THE BLIND SPOT Sign in FIGHT FILMER SIMULATOR BAD ANGLE ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
