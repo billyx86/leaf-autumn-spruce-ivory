@@ -484,8 +484,8 @@ export function tickSim(dt: number, inp: FrameInput) {
     s.vx *= Math.exp(-dt * 6);
     s.vz *= Math.exp(-dt * 6);
   }
-  let nx = s.px + s.vx * dt;
-  let nz = s.pz + s.vz * dt;
+  const nx = s.px + s.vx * dt;
+  const nz = s.pz + s.vz * dt;
   const hit = collide(nx, nz, 0.38);
   s.px = hit.x;
   s.pz = hit.z;
