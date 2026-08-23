@@ -5,7 +5,8 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { CROWD, TAKE_LEN } from "./layout";
 import { World } from "./world";
-import { Person, applyCrowdPose, applyFighterPose } from "./people";
+import { Person } from "./people";
+import { applyCrowdPose, applyFighterPose } from "./poses";
 import { createGeos, createMaterials } from "./textures";
 import {
   attachControlsTest,
@@ -291,7 +292,7 @@ function CaptureCanvas() {
       });
     }
     last.current = phase;
-  }, [phase]);
+  }, [phase, gl]);
 
   useFrame(() => {
     const s = useTape.getState();
