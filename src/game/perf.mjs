@@ -12,6 +12,25 @@
 export const ALPHA = 0.1;
 
 /**
+ * Frame-time thresholds (ms) used to colour the dev readout:
+ * `ok` holds ~60 fps, `warn` holds ~30 fps, above that is `bad`.
+ */
+export const FRAME_THRESHOLDS = { ok: 16.7, warn: 33.4 };
+
+/**
+ * Classify a smoothed frame time (ms) into a severity tier for the HUD:
+ * `"idle"` (no samples yet), `"ok"`, `"warn"` or `"bad"`.
+ * @param {number} ms smoothed frame time in milliseconds
+ * @returns {"idle"|"ok"|"warn"|"bad"}
+ */
+export function classifyFrameMs(ms) {
+  if (!(ms > 0)) return "idle";
+  if (ms <= FRAME_THRESHOLDS.ok) return "ok";
+  if (ms <= FRAME_THRESHOLDS.warn) return "warn";
+  return "bad";
+}
+
+/**
  * Fold frame samples into a smoothed frame-time estimate.
  * @returns {{ tick: (dtMs: number) => void, fps: number, ms: number, readout: () => string }}
  */

@@ -14,6 +14,12 @@ export interface FrameMeter {
 /** EMA smoothing factor for the frame-time sample (0 = fully new, 1 = fully old). */
 export const ALPHA: number;
 
+/** Frame-time thresholds (ms): `ok` holds ~60 fps, `warn` holds ~30 fps. */
+export const FRAME_THRESHOLDS: { ok: number; warn: number };
+
+/** Classify a smoothed frame time (ms) into a severity tier for the HUD. */
+export function classifyFrameMs(ms: number): "idle" | "ok" | "warn" | "bad";
+
 /** Fold frame samples into a smoothed frame-time estimate. */
 export function createFrameMeter(): FrameMeter;
 

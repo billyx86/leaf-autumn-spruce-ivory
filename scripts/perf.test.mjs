@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { ALPHA, createFrameMeter } from "../src/game/perf.mjs";
+import { ALPHA, classifyFrameMs, createFrameMeter } from "../src/game/perf.mjs";
 
 test("fresh meter reports 0 fps / 0 ms before any sample", () => {
   const m = createFrameMeter();
@@ -47,4 +47,16 @@ test("readout formats '<fps> fps · <ms> ms' with one decimal", () => {
   const out = m.readout();
   assert.match(out, /^\d+ fps · \d+\.\d ms$/);
   assert.ok(out.startsWith("30 fps"));
+});
+
+test("classifyFrameMs maps frame time to a severity tier", () => {
+  assert.equal(classifyFrameMs(0), "idle");
+  assert.equal(classifyFrameMs(Number.NaN), "idle");
+  assert.equal(classifyFrameMs(-3), "idle");
+  assert.equal(classifyFrameMs(8.0), "ok"); // ~125 fps
+  assert.equal(classifyFrameMs(16.7), "ok"); // boundary, 60 fps
+  assert.equal(classifyFrameMs(17.0), "warn");
+  assert.equal(classifyFrameMs(33.4), "warn"); // boundary, ~30 fps
+  assert.equal(classifyFrameMs(40.0), "bad");
+  assert.equal(classifyFrameMs(250.0), "bad");
 });
