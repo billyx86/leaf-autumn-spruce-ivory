@@ -3,6 +3,7 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Overlay } from "@/components/game/Overlay";
+import { PerfHud } from "@/components/game/PerfHud";
 import { useTape } from "@/game/store";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +37,7 @@ function Home() {
           </div>
         )}
       </div>
+      <PerfHud />
       <Overlay />
     </main>
   );
