@@ -63,6 +63,20 @@ layout takes over automatically (there is no toggle).
 
 There is no sprint on touch.
 
+### See it in action
+
+| | |
+| --- | --- |
+| ![](screenshots/bright-play.png) | The take, wide — keep everyone in frame. |
+| ![](screenshots/playing-mobile.png) | Touch layout: left stick to move, `+`/`−`/`OI` to the right. |
+| ![](screenshots/tape-results.png) | "Take in the can" — the scorecard. |
+
+The scorecard is the whole game in one screen: **ON SUBJECT** (how much of
+the take actually shows the fight), **CLIPS**, **PAVEMENT** and **SKY** (how
+long you filmed the tarmac or the air), **GOT HIT**, and **FINGER** (how many
+times someone's hand crossed the lens). Keep ON SUBJECT high and the rest at
+zero.
+
 ### What makes a clean take
 
 - **Stay on the subject.** The whole game is "keep the scrap in frame."
