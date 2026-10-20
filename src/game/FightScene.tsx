@@ -26,6 +26,7 @@ import {
   lockPointer,
   setLockTarget,
 } from "./input";
+import { frameMeter, isPerfEnabled } from "./perf.mjs";
 import { tapeAudio } from "./audio";
 import { useTape, type TapePhase } from "./store";
 import { beginTape, finishTape, stampTape, lastReplay, keyAt, applyKeyToSim, advanceReplay, replayNow } from "./recorder";
@@ -61,6 +62,7 @@ function Loop({
   const shoutOnce = useRef(false);
 
   useFrame(({ camera }, delta) => {
+    if (isPerfEnabled) frameMeter.tick(delta * 1000);
     const dt = Math.min(delta, 0.08);
     const phase = useTape.getState().phase;
     const playing = phase === "playing";
