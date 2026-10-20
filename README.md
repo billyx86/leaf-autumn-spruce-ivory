@@ -32,6 +32,47 @@ npm run dev        # vite dev server on http://localhost:8080
 No `DATABASE_URL` needed locally — the app falls back to PGLite and
 applies the same `migrations/` at startup.
 
+## Controls
+
+You play the *cameraman*, not a fighter. Keep the scrap in frame, keep the
+tarmac and sky out, and don't panic.
+
+### Desktop
+
+Aiming uses pointer-lock — click the scene once to lock the mouse.
+
+| Action         | Input                                       |
+| -------------- | ------------------------------------------- |
+| Move           | `W A S D` or the Arrow keys                 |
+| Aim / look     | Mouse (click to lock the pointer)           |
+| Zoom in / out  | Scroll up / down, or hold `Q` / `E`         |
+| Sprint         | Hold `Shift` (faster, but raises the crowd's panic) |
+| Shout          | `Space` (raises panic)                      |
+
+### Touch
+
+On a coarse-pointer device, or a window narrower than 700 px, the touch
+layout takes over automatically (there is no toggle).
+
+| Action        | Input                                  |
+| ------------- | -------------------------------------- |
+| Move          | Left virtual stick                     |
+| Aim / look    | Drag anywhere on the scene             |
+| Zoom in / out | `+` / `−` buttons (bottom-right)       |
+| Shout         | `OI` button (bottom-right)             |
+
+There is no sprint on touch.
+
+### What makes a clean take
+
+- **Stay on the subject.** The whole game is "keep the scrap in frame."
+- **Don't film the tarmac or the sky.** Panning low or high both hurt the clip.
+- **Control your zoom.** Zoom is clamped to a fixed range and drifts back to
+  ~1.15× if you leave it alone.
+- **Keep it calm.** Sprinting, shouting, getting too close to the fight, or
+  getting hit all raise the crowd's *panic* — and a panicked clip is a bad
+  clip. The opening line of this README is the entire strategy.
+
 ## Scripts
 
 | Command                 | What it does                                    |
@@ -56,6 +97,27 @@ pins its own working directory so it is not affected by the app's real
 
 CI (`.github/workflows/ci.yml`) runs `typecheck`, `lint`, `test` and a
 full `build` on every push to `main` and on every PR.
+
+## Performance
+
+The fight scene is a single full-screen R3F canvas; the crowd (a fixed pool
+of instanced "people" and spark particles) plus the per-frame camera/zoom
+spring are the only things that can hurt frame time. To verify that on real
+hardware — the thing you can't do in CI — open the game with **`?perf=1`**
+in the URL:
+
+```
+http://localhost:8080/?perf=1
+```
+
+A green readout appears top-left showing smoothed **fps** and **frame time**
+(e.g. `61 fps · 16.4 ms`). It's dev-only, driven by the game loop, and renders
+nothing in a normal (non-`?perf=1`) session. The meter math lives in
+`src/game/perf.mjs` and is unit-tested in `scripts/perf.test.mjs`.
+
+Use it to measure the crowd/spark draw cost before tuning anything: if a
+device tier can't hold ~60 fps, the fix is a device-tier crowd/spark cap
+(see issue #7), not dropping the canvas.
 
 ## Layout
 
